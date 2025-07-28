@@ -1,0 +1,14 @@
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.AssemblyInfoInputs.cache
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.AssemblyInfo.cs
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.csproj.CoreCompileInputs.cache
+/Users/yuta/Desktop/Arriba_eat/bin/Debug/net9.0/Arriba_eat
+/Users/yuta/Desktop/Arriba_eat/bin/Debug/net9.0/Arriba_eat.deps.json
+/Users/yuta/Desktop/Arriba_eat/bin/Debug/net9.0/Arriba_eat.runtimeconfig.json
+/Users/yuta/Desktop/Arriba_eat/bin/Debug/net9.0/Arriba_eat.dll
+/Users/yuta/Desktop/Arriba_eat/bin/Debug/net9.0/Arriba_eat.pdb
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.dll
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/refint/Arriba_eat.dll
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.pdb
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.genruntimeconfig.cache
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/ref/Arriba_eat.dll
