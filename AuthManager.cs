@@ -1,21 +1,30 @@
 using System.Data;
 
 namespace Arriba_eat;
+public enum RestaurantStyle
+{
+    Japanese = 1,
+    Chinese,
+    French,
+    Italian,
+    Austraian
+}
 
 public class AuthManager
 {
+    private UserController _controller;
+    
     public User Login()
     {
         Console.WriteLine("Enter email address");
         string email = Console.ReadLine();
+        
         Console.WriteLine("Enter password");
         string password = Console.ReadLine();
         
-        UserController controller = new UserController();
-        
-        foreach (var user in controller.GetUsers())
+        foreach (var user in _controller.GetUsers())
         {
-            if (user.getEmail() == email && user.getPassword() == password)
+            if (user.email == email && user.password == password)
             {
                 return user;
             }
@@ -23,15 +32,6 @@ public class AuthManager
 
         Console.WriteLine("Email or password is incorrect");
         return null;
-    }
-    
-    private enum RestaurantStyle
-    {
-        Japanese = 1,
-        Chinese,
-        French,
-        Italian,
-        Austraian
     }
     
     public void Register()
@@ -46,7 +46,6 @@ public class AuthManager
         string password = Console.ReadLine();
 
         User newUser = null; //initialise a new user
-        UserController controller = null; // initialise a new contriller
 
         while (true)
         {
@@ -56,20 +55,19 @@ public class AuthManager
             Console.WriteLine("3.Deliverer");
             string input = Console.ReadLine();
 
-            if (!int.TryParse(input, out int userTypeChoice) || userTypeChoice < 1 || userTypeChoice > 3)
+            if (!int.TryParse(input, out int choice) || choice < 1 || choice > 3)
             {
                 Console.WriteLine("Please enter a valid number");
                 continue;
             }
 
-            switch (userTypeChoice)
+            switch (choice)
             {
                 case 1:
                     Console.WriteLine("Enter your location in the form of x,y");
                     string customerLocation = Console.ReadLine();
 
                     newUser = new Customer(name, email, password, customerLocation);
-                    controller = new CustomerController();
                     break;
 
                 case 2:
@@ -87,7 +85,7 @@ public class AuthManager
                         }
 
                         string styleInput = Console.ReadLine();
-                        if (int.TryParse(styleInput, out restaurantStyleChoice) && Enum.IsDefined(typeof(RestaurantStyle), restaurantStyleChoice));
+                        if (int.TryParse(styleInput, out restaurantStyleChoice) && Enum.IsDefined(typeof(RestaurantStyle), restaurantStyleChoice))
                         {
                             selectedStyle = (RestaurantStyle)restaurantStyleChoice;
                             break;
@@ -97,7 +95,6 @@ public class AuthManager
                     }
 
                     newUser = new Restaurant(name, email, password, restaurantLocation, selectedStyle.ToString()); 
-                    controller = new RestaurantController();
                     break;
 
                 case 3:
@@ -105,7 +102,6 @@ public class AuthManager
                     string licencePlate = Console.ReadLine();
 
                     newUser = new Deliverer(name, email, password, licencePlate);
-                    controller = new DelivererController();
                     break;
             }
 
@@ -114,7 +110,8 @@ public class AuthManager
 
         if (newUser != null)
         {
-            controller.AddUser(newUser);
+            _controller.AddUser(newUser);
+            Console.WriteLine($"Welcome to Arriba eats {newUser.name}!!");
         }
     }
     

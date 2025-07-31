@@ -12,3 +12,4 @@
 /Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.pdb
 /Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.genruntimeconfig.cache
 /Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/ref/Arriba_eat.dll
+/Users/yuta/Desktop/Arriba_eat/obj/Debug/net9.0/Arriba_eat.sourcelink.json
