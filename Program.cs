@@ -6,7 +6,9 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        AuthManager authManager = new AuthManager();
+        UserController controller = new UserController();
+        AuthManager authManager = new AuthManager(controller);
+        
         while (true)
         {
             Console.WriteLine("Welcome to Arriba!");
@@ -26,26 +28,31 @@ public class Program
                     if (user != null)
                     {
                         Console.WriteLine($"Welcome back {user.name}!");
-                    }
-                    if (user is Restaurant restaurant)
-                    {
-                        RestaurantController controller = new RestaurantController(restaurant);
-                        RestaurantUI UI = new RestaurantUI(controller, restaurant);
-                        UI.DisplayMainMenu();
-                    }
-                    else if (user is Customer customer)
-                    {
-                        CustomerUI UI = new CustomerUI();
-                        UI.DisplayMainMenu();
-                    }
-                    else if (user is Deliverer deliverer)
-                    {
-                        DelivererUI UI = new DelivererUI();
-                        UI.DisplayMainMenu();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Account does not exist");
+                        bool loggedIn  = true;
+                        while (loggedIn)
+                        {
+                            if (user is Restaurant restaurant)
+                            {
+                                RestaurantController restaurantController = new RestaurantController(restaurant);
+                                RestaurantUI UI = new RestaurantUI(restaurantController, restaurant);
+                                loggedIn = UI.DisplayMainMenu();
+                            }
+                            else if (user is Customer customer)
+                            {
+                                CustomerUI UI = new CustomerUI();
+                                loggedIn = UI.DisplayMainMenu();
+                            }
+                            else if (user is Deliverer deliverer)
+                            {
+                                DelivererUI UI = new DelivererUI();
+                                loggedIn = UI.DisplayMainMenu();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Account does not exist");
+                            }
+                        }
+                        
                     }
                     break;
                 case 3:

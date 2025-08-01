@@ -53,17 +53,12 @@ public class RestaurantUI:UserUI
             {
                 return selectedOrder;
             }
-            else
-            {
-                Console.WriteLine("Order not found");
-                return null;
-            }
         }
-
+        Console.WriteLine("Order not found");
         return null;
     }
     
-    private Order DisplayOrdersPreparing() // still have to implement error handling in case there is no orders yet
+    private Order DisplayOrdersPreparing() 
     {
         var orders = _restaurantController.GetAllOrdersPreparing();
         if (!orders.Any())
@@ -85,23 +80,47 @@ public class RestaurantUI:UserUI
             {
                 return selectedOrder;
             }
-            else
-            {
-                Console.WriteLine("Order not found");
-                return null;
-            }
         }
-
+        Console.WriteLine("Order not found");
         return null;
     }
 
     private Order DisplayDelivererArrived()
     {
-        var deliverers
+        var orders = _restaurantController.GetAllOrdersReady();
+        if (!orders.Any())
+        {
+            Console.WriteLine("There are no orders ready to be picked up.");
+            return null;
+        }
+
+        foreach (var order in orders)
+        {
+            if (order.deliverer == null)
+            {
+                Console.WriteLine($"Order #{order.orderID} for {order.customer.name} looking for a deliverer.");
+            }
+            else
+            {
+                Console.WriteLine($"Order #{order.orderID} picked up by: {order.deliverer.name} (Plate: {order.deliverer.licencePlate})");
+            }
+        }
+
+        if (int.TryParse(Console.ReadLine(), out int orderID))
+        {
+            var selectedOrder = _restaurantController.GetOrderById(orderID);
+            if (selectedOrder != null)
+            {
+                return selectedOrder;
+            }
+        }
+
+        Console.WriteLine("Order not found");
+        return null;
     }
     
     
-    public override void DisplayMainMenu()
+    public override bool DisplayMainMenu()
     {
         base.DisplayMainMenu();
         Console.WriteLine("2. Add new item to menu");
@@ -125,19 +144,30 @@ public class RestaurantUI:UserUI
                 DisplayMenuItems();
                 break;
             case 4:
-                Order OrderToCook = DisplayOrdersRecieved();
-                _restaurantController.PrepareOrder(OrderToCook);
+                Order orderToCook = DisplayOrdersRecieved();
+                if (orderToCook != null)
+                {
+                    _restaurantController.PrepareOrder(orderToCook);
+                }
                 break;
             case 5:
-                Order PreparedOrder= DisplayOrdersPreparing();
-                _restaurantController.FinishCooking(PreparedOrder);
+                Order preparedOrder= DisplayOrdersPreparing();
+                if (preparedOrder != null)
+                {
+                    _restaurantController.FinishCooking(preparedOrder);
+                }
                 break;
             case 6:
-                //DisplayDelivererArrived() -> Deliverer deliverer, Order order
-                _restaurantController.HandoutOrder(deliverer, order);
+                Order orderToHandover = DisplayDelivererArrived();
+                if (orderToHandover != null)
+                {
+                    _restaurantController.HandoutOrder(orderToHandover);
+                }
                 break;
             case 7:
-                return;
+                return false;
         }
+
+        return true;
     }
 }

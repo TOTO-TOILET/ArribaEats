@@ -2,7 +2,7 @@ namespace Arriba_eat;
 
 public class Deliverer : User
 {
-    private string licencePlate;
+    public string licencePlate{ get; set; }
     public Deliverer(string name, string email, string password, string licencePlate)
     {
         this.name = name;

@@ -24,10 +24,9 @@ public class RestaurantController : UserController
         order.status = OrderStatus.Ready;
     }
 
-    public void HandoutOrder(Order order, Deliverer deliverer)
+    public void HandoutOrder(Order order)
     {
         order.status = OrderStatus.OutForDelivery;
-        order.deliverer = deliverer;
         Console.WriteLine($"Order: {order.orderID} is out for delivery");
     }
     

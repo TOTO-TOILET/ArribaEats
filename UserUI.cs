@@ -12,9 +12,10 @@ public abstract class UserUI
     /// <summary>
     /// Each user type have different main menu 
     /// </summary>
-    public virtual void DisplayMainMenu()
+    public virtual bool DisplayMainMenu()
     {
         Console.WriteLine("1. Display user information");
+        return true;
     }
 }
 

@@ -13,6 +13,11 @@ public enum RestaurantStyle
 public class AuthManager
 {
     private UserController _controller;
+
+    public AuthManager(UserController controller)
+    {
+        _controller = controller;
+    }
     
     public User Login()
     {
